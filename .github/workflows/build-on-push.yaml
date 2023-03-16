@@ -1,5 +1,6 @@
 name: Build FFmpeg on push
 on:
+  workflow_dispatch
   push:
     paths:
       - ffmpeg-source
