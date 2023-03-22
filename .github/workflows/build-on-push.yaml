@@ -1,14 +1,6 @@
 name: Build FFmpeg on push
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ffmpeg-source
-      - ffmpeg-windows-build-helpers
-      - dependencies.sh
-      - .github/workflows/build-on-push.yaml
-    branches-ignore:
-      - dependabot/**
       
 jobs:
   build:
@@ -136,7 +128,7 @@ jobs:
           Using ffmpeg-windows-build-helpers git-${{ needs.build.outputs.helper-git-sha }}" \
           -t "${{ needs.build.outputs.date-time-after }} ${{ needs.build.outputs.git-sha }}"
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
           GH_REPO: ${{ github.repository }}
           
   delete_old:
@@ -150,4 +142,4 @@ jobs:
           delete_tags: true
           delete_tag_pattern: a
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
